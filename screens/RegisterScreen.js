@@ -2,13 +2,15 @@ import { NavigationRouteContext } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const RegisterScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [imageURL, setImageUrl] = useState('');
+    const [phone, setPhone] = useState('');
+
     const register = () => {
         auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
@@ -56,6 +58,13 @@ const RegisterScreen = ({navigation}) => {
                 secureTextEntry
             />
             <Input
+                placeholder="Enter your Phone Number"
+                label="Phone Number"
+                leftIcon={{ type: 'material', name: 'phone' }}
+                value={phone}
+                onChangeText={text => setPhone(text)}
+            />
+            <Input
                 placeholder="Enter your image Url"
                 label="Profile Picture"
                 leftIcon={{ type: 'material', name: 'face' }}
@@ -75,8 +84,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     container: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 10
+        padding: 10,
+        width: 100
     }
 })

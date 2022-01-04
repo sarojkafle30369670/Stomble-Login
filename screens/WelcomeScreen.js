@@ -1,13 +1,13 @@
-import { auth } from '../firebase';
+import { db, auth } from '../firebase';
 import React, { useLayoutEffect }from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Button } from 'react-native-elements';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Avatar,Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-elements';
+
 
 
 const WelcomeScreen = ({navigation}) => {
+  
     
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -43,11 +43,58 @@ const WelcomeScreen = ({navigation}) => {
         });
     }
 
+    const listData =()=>{
+        db.collection(auth.currentUser.uid).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+        });
+        return listData;
+    }
+
+
     return (
-        <View>
-            <Text>Welcome {auth?.currentUser?.displayName}</Text>
-            <Button title="Add New Contact"  onPress={()=>navigation.navigate('Contact')} style={styles.button} />
-        </View>
+        <>
+            <View>
+                <Text>Welcome {auth?.currentUser?.displayName}</Text>
+                <Button title="Add New Contact"  onPress={()=>navigation.navigate('Contact')} style={styles.button} />
+                <Button title="List Contact" onPress={listData} style={styles.button} />
+
+            </View>
+            {/* <DataTable>
+                <DataTable.Header>
+                <DataTable.Title>Dessert</DataTable.Title>
+                <DataTable.Title numeric>Calories</DataTable.Title>
+                <DataTable.Title numeric>Fat</DataTable.Title>
+                </DataTable.Header>
+
+                <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+                <DataTable.Cell numeric>6.0</DataTable.Cell>
+                </DataTable.Row>
+
+                <DataTable.Row>
+                <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
+                <DataTable.Cell numeric>237</DataTable.Cell>
+                <DataTable.Cell numeric>8.0</DataTable.Cell>
+                </DataTable.Row>
+
+                <DataTable.Pagination
+                page={page}
+                numberOfPages={3}
+                onPageChange={(page) => setPage(page)}
+                label="1-2 of 6"
+                optionsPerPage={optionsPerPage}
+                itemsPerPage={itemsPerPage}
+                setItemsPerPage={setItemsPerPage}
+                showFastPagination
+                optionsLabel={'Rows per page'}
+                />
+            </DataTable> */}
+
+        </>
     )
 }
 
@@ -58,8 +105,6 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     container: {
-        flex: 1,
-        alignItems: 'center',
         padding: 10
     }
 })

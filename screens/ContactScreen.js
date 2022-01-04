@@ -1,12 +1,32 @@
 import React, {useState} from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Input, Button } from 'react-native-elements';
+import { auth, db,} from '../firebase';
 
-const ContactScreen = () => {
+const ContactScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [imageURL, setImageUrl] = useState('');
     const [phone, setPhone] = useState('');
+    const update = () => {
+            db.collection(auth.currentUser.uid).add({
+                name: name,
+                phone:phone,
+                email:email,
+                photo:imageURL
+            }).then(() => {
+                setName("");
+                setEmail("");
+                setPhone("");
+                setImageUrl("");
+                alert("The new contact detail is added!!!!");
+                navigation.replace('Welcome');
+                
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });        
+    }
     return (
         <View style={styles.container}>
             <Input
@@ -38,7 +58,7 @@ const ContactScreen = () => {
                 onChangeText={text => setImageUrl(text)}
             />
 
-            <Button title="Update"  style={styles.button} />
+            <Button title="Update" onPress={update} style={styles.button} />
         </View>
     )
 }

@@ -21,6 +21,7 @@ const LoginScreen = ({navigation}) => {
               navigation.replace('Welcome')
               // ...
             } else {
+                navigation.canGoBack()&&navigation.popToTop();
               // User is signed out
               // ...
             }
