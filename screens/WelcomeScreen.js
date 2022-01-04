@@ -1,7 +1,7 @@
 import { db, auth } from '../firebase';
 import React, { useLayoutEffect }from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Avatar,Button } from 'react-native-elements';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { Avatar,Button, ListItem, Icon, Badge, ListItemProps, Switch, colors } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 
 
@@ -42,16 +42,31 @@ const WelcomeScreen = ({navigation}) => {
             // An error happened.
         });
     }
-
-    const listData =()=>{
+    const getDoc = () => {
         db.collection(auth.currentUser.uid).get().then((querySnapshot) => {
+            var contactList = [];
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
+                contactList.push(Object.values(doc.data()));
+                const data = Object.values(doc.data());
             });
+            console.log(querySnapshot);
+            console.log(contactList);
+            for( var i = 0; i < contactList.length; i ++){
+                contactList[i].forEach(element =>{
+                    console.log(element);
+                    
+                    
+                    
+                })
+            }
+            
+            
         });
-        return listData;
+    
     }
+    
 
 
     return (
@@ -59,8 +74,25 @@ const WelcomeScreen = ({navigation}) => {
             <View>
                 <Text>Welcome {auth?.currentUser?.displayName}</Text>
                 <Button title="Add New Contact"  onPress={()=>navigation.navigate('Contact')} style={styles.button} />
-                <Button title="List Contact" onPress={listData} style={styles.button} />
+                <Button title="List Contact" onPress={getDoc} style={styles.button} />
 
+            </View>
+            <View style = {{flex:5, justifyContent:'fill', alignItems: 'left', marginTop:'5%'}}>
+                <View style = {{flexDirection:"row"}}>
+                    <View style ={{width:125, border:'Thin line', backgroundColor:'red'}}>
+                        <Text style={{color:'white'}}>Name</Text>
+                    </View>
+                    <View style ={{width:125, border:'Thin line', backgroundColor:'red'}}>
+                        <Text style={{color:'white'}}>Email</Text>
+                    </View>
+                    <View style ={{width:125, border:'Thin line', backgroundColor:'red'}}>
+                        <Text style={{color:'white'}}>Phone</Text>
+                    </View>
+                    <View style ={{width:125, border:'Thin solid', backgroundColor:'red'}}>
+                        <Text style={{color:'white'}}>Avatar</Text>
+                    </View>
+
+                </View>
             </View>
             {/* <DataTable>
                 <DataTable.Header>
