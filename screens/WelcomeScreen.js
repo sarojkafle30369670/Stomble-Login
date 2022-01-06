@@ -10,7 +10,7 @@ import {
 import { Button, Avatar } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
 import { auth, db } from "../firebase";
-
+// //// updated
 const WelcomeScreen = ({ navigation }) => {
   const [index, setIndex] = React.useState(0);
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
