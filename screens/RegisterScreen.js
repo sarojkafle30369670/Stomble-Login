@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 10,
-        width: 100
+        width: '100%'
     }
 })
