@@ -94,22 +94,22 @@ const WelcomeScreen = ({ navigation }) => {
       >
         <View style={{ flexDirection: "row" }}>
           <View
-            style={{ width: 130, border: "solid line", backgroundColor: "red" }}
+            style={{ width: 190, border: "solid line", backgroundColor: "red" }}
           >
             <Text style={{ color: "white" }}>Name</Text>
           </View>
           <View
-            style={{ width: 130, border: "solid line", backgroundColor: "red" }}
+            style={{ width: 190, border: "solid line", backgroundColor: "red" }}
           >
             <Text style={{ color: "white" }}>Photo</Text>
           </View>
           <View
-            style={{ width: 130, border: "solid line", backgroundColor: "red" }}
+            style={{ width: 190, border: "solid line", backgroundColor: "red" }}
           >
             <Text style={{ color: "white" }}>Email</Text>
           </View>
           <View
-            style={{ width: 130, border: "solid line", backgroundColor: "red" }}
+            style={{ width: 190, border: "solid line", backgroundColor: "red" }}
           >
             <Text style={{ color: "white" }}>Phone</Text>
           </View>
@@ -120,7 +120,7 @@ const WelcomeScreen = ({ navigation }) => {
             <View style={{ flexDirection: "row" }}>
               <View
                 style={{
-                  width: 130,
+                  width: 190,
                   border: "solid line",
                   backgroundColor: "yellow",
                 }}
@@ -129,7 +129,7 @@ const WelcomeScreen = ({ navigation }) => {
               </View>
               <View
                 style={{
-                  width: 130,
+                  width: 190,
                   border: "solid line",
                   backgroundColor: "yellow",
                 }}
@@ -138,7 +138,7 @@ const WelcomeScreen = ({ navigation }) => {
               </View>
               <View
                 style={{
-                  width: 130,
+                  width: 190,
                   border: "solid line",
                   backgroundColor: "yellow",
                 }}
@@ -147,7 +147,7 @@ const WelcomeScreen = ({ navigation }) => {
               </View>
               <View
                 style={{
-                  width: 130,
+                  width: 190,
                   border: "solid line",
                   backgroundColor: "yellow",
                 }}
